@@ -1,41 +1,45 @@
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Random;
+import java.util.Map.Entry;
 
 public class Couleurs {
 
-	HashMap<Integer, Color> nuancier = new HashMap<>();
+	HashMap<Color, Integer> nuancier = new HashMap<>();
 	int nbCouleur;
 
-	Couleurs(int r, int g, int b, int nbCouleur) {
-		this.nbCouleur = nbCouleur;
-		nuancier.put(convertToNuance(new Color(r, g, b)), new Color(r, g, b));
-		genererNuanceGris(nbCouleur);
+	Couleurs() {
+		for (int r = 0; r < 256; r++) {
+			for (int v = 0; v < 256; r++) {
+				for (int b = 0; b < 256; r++) {
+					nuancier.put(new Color(r, v, b), convertToNuance(new Color(r, v, b)));
+				}
+			}
+		}
 	}
 
 	public int convertToNuance(Color c) {
 		return (int) (0.2126 * c.getRed() + 0.7152 * c.getGreen() + 0.0722 * c.getBlue());
 	}
 
-	void genererNuanceGris(int nb) {
-		Random rng = new Random();
-		int[] alea = new int[this.nbCouleur];
-		do {
-			for (int i = 1; i <= alea.length; i++) {
-				alea[i] = rng.nextInt();
+	public ArrayList[] genererCouleur(int nbCouleur, Color couleur) {
+		
+		ArrayList<Color> tab[] = new ArrayList[nbCouleur];
+		int tmp = convertToNuance(couleur);
+		for (int i = 0; i < nbCouleur; i++) {
+			for (ArrayList<Color> A : tab) {
+				A = new ArrayList<>();
+				for (Entry<Color, Integer> e : nuancier.entrySet()) {
+					if (e.getValue() == tmp) {
+						A.add(e.getKey());
+					}
+				}
 			}
-		} while (!verifAlea(alea));
 
-	}
-
-	boolean verifAlea(int[] tab) {
-		for (int i = 0; i < tab.length - 1; i++) {
-			for (int j = i; j < tab.length - 1; j++) {
-				if ((tab[j] > (tab[j + 1] + 10) || tab[j] < (tab[j + 1] - 10)))
-					return false;
-			}
+			tmp = (tmp + 10) % 255;
 		}
-		return true;
+
+		return tab;
 	}
 
 }
