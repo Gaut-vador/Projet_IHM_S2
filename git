@@ -1,7 +1,9 @@
+//recup
 git init
 git remite add origin https://github.com/Gaut-vador/Projet_IHM_S2
 git push -u origin master
 git pull
+//ajout
 git add *
 git commit -m "......"
 git push
