@@ -1,61 +1,33 @@
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
-import java.awt.FlowLayout;
-
 import javax.swing.JLabel;
 import javax.swing.JSlider;
-import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import java.awt.Canvas;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Rectangle;
-import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.CardLayout;
 
 
-public class testBulder {
+public class premiereCouleur {
 
 	private JFrame frame;
 	int tailleR = 51;
 	int tailleV = 153;
 	int tailleB = 255;
 	Canvas ChoixCouleur = new Canvas();
-	static int nbC = 0;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-
-			private int n = nbC;
-
-			public void run() {
-				try {
-					testBulder window = new testBulder(this.n );
-					window.frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	int nbC = 0;
 
 	/**
 	 * Create the application.
 	 */
-	public testBulder(int n) {
-		this.nbC = n;
+	public premiereCouleur(int n) {
 		initialize();
+		this.nbC = n;
 	}
 
 	/**
@@ -154,6 +126,17 @@ public class testBulder {
 		g.gridy = 7;
 		JButton button = new JButton("Valider");
 		frame.getContentPane().add(button, g);
+		
+		button.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				Couleurs c = new Couleurs();
+				choixCouleur t = new choixCouleur(c.genererCouleur(nbC, new Color(rouge.getValue(), vert.getValue(), bleu.getValue())), nbC);
+				
+			}
+		});
 	}
 
 }

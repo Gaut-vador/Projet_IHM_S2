@@ -8,7 +8,6 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JWindow;
 
 public class nombreCouleur {
@@ -44,8 +43,7 @@ public class nombreCouleur {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				fenetre.setVisible(false);
-				testBulder t = new testBulder(n);
-				
+				new premiereCouleur(n);
 			}
 			
 		});
@@ -55,7 +53,6 @@ public class nombreCouleur {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			n = nbC.getSelectedIndex() + 1;
-			
 		}
 		
 	});
@@ -72,13 +69,8 @@ public class nombreCouleur {
 		}
 	}
 	
-	public static void main(String[] args) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-	        public void run() {
-	          new nombreCouleur();
-	        }
-	    });
-
+	public int getNombreCouleur(){
+		return n;
 	}
 	
 	
